@@ -48,9 +48,6 @@
 
 		function _get($path, $template, $args='') {
 		global $ARCurrent;
-			// for now we have to remove all current redirects
-			$old_redirects = $ARCurrent->shortcut_redirect;
-			$ARCurrent->shortcut_redirect = Array();
 			$realpath = self::_make_real_path($path);
 			if ($realpath) {
 				$context = pobject::getContext();
@@ -59,8 +56,6 @@
 			} else {
 				$result = Array();
 			}
-			// restore redirects
-			$ARCurrent->shortcut_redirect = $old_redirects;
 			return $result;
 		}
 
