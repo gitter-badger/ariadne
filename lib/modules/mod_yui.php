@@ -572,6 +572,7 @@
 		
 		/* dialog.add.list.php */
 		function getTypes($arObject, $showall) {
+			$result = Array();
 			if (!$showall) {
 				$typetree = $arObject->call('typetree.ini');
 				$thistypetree = $typetree[$arObject->type];
@@ -590,11 +591,10 @@
 					$result[$type] = $name;
 				}
 
-				$typetree = $arObject->call('typetree.ini');
-				foreach ($typetree as $value) {
-					foreach( $value as $type => $name ) {
-						$result[$type] = $name;
-					}
+				$arObject->call('typetree.ini');
+				$arTypeNames = $arObject->getvar('arTypeNames');
+				if (is_array($arTypeNames)) {
+					$result = array_merge($result, $arTypeNames);
 				}
 			}
 			asort($result);
